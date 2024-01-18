@@ -27,7 +27,7 @@ def search_parking(park):
 
     for parking in parkings['records']:
         nom = parking['fields']['name']
-        
+
         if nom.lower() == park.lower():
             places_disponibles = parking['fields']['dispo']
             return f'{nom} | {places_disponibles} places disponibles'
@@ -45,12 +45,12 @@ def parking_locate():
 
     for park in parkings['records']:
 
-        coos = park["geometry"]["coordinates"]
-        coos.reverse()
+        coos = park['fields']["coords"].split(',')
+        # coos.reverse()
 
-        if park['fields']['dispo'] >= 30:
+        if int(park['fields']['dispo']) >= 30:
             color = 'green'
-        elif park['fields']['dispo'] > 0:
+        elif int(park['fields']['dispo']) > 0:
             color = 'orange'
         else:
             color =  'red'
